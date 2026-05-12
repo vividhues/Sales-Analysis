@@ -1,0 +1,8 @@
+print_section("Analysis of the sales: ")
+print(f"Best Product: {best['product']} (${best['total_sales']:,} sales)")
+print(f"Best Region: {regional_summary.iloc[0]['region']} (${int(regional_summary.iloc[0]['total_sales']):,} sales)")
+print(f"Best Channel: {channel_summary.iloc[0]['channel']} (${int(channel_summary.iloc[0]['total_sales']):,} sales)")
+print(f"Predicted #1 Product: {top['product']} | {top['region']} | {top['channel']}")
+print(f"Model R² Score: {metrics['R2']}")
+print(f"\n  Charts saved to: reports/")
+print()
