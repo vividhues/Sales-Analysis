@@ -18,7 +18,7 @@ pd.set_option("display.max_columns", 20)
 pd.set_option("display.width", 120)
 
 
-def print(title: str):
+def print_section(title: str):
     print(f"\n{'='*60}")
     print(f"  {title}")
     print(f"{'='*60}\n")
