@@ -1,6 +1,15 @@
 # Sales-Analysis
 Data munching and analysis for sales in business.
 
+### Setup (5 minutes)
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# run project 
+python src/main.py
+```
+
 # Workflow idea
 ## Reading the Receipts (pandas)
 - make dataframe, sort dates from oldest to newest if needed.
@@ -12,4 +21,11 @@ Data munching and analysis for sales in business.
 
 ## Charts (matplotlib + seaborn)
 
-- matplotlib and seaborn for data visualization, saves in `reports` folder.
+- matplotlib and seaborn for data visualization, saved in `reports` folder.
+
+## To-Do
+
+- [ ] Add seperate window for charts (Web app?)
+- [ ] Make a better front end
+- [ ] Make it flexible with various sales dataset
+- [ ] A better if not same ML algorithm
