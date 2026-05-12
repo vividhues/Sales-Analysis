@@ -1,7 +1,7 @@
 # Sales-Analysis
 Data munching and analysis for sales in business.
 
-### Setup (5 minutes)
+### Setup
 ```bash
 # Install dependencies
 pip install -r requirements.txt
