@@ -1,4 +1,4 @@
-setiptools
+setuptools
 numpy
 pandas
 scikit-learn
