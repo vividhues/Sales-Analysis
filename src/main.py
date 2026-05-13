@@ -18,6 +18,23 @@ pd.set_option("display.max_columns", 20)
 pd.set_option("display.width", 120)
 
 
+def format_inr(amount):
+    """1150400 -> ₹11,50,400"""
+    amount = int(amount)
+    s = str(abs(amount))
+    if len(s) <= 3:
+        formatted = s
+    else:
+        formatted = s[:-3] + ',' + s[-3:]
+        s = s[:-3]
+        while len(s) > 2:
+            formatted = s[-2:] + ',' + formatted
+            s = s[:-2]
+        if s:
+            formatted = s + ',' + formatted
+            
+    return f"₹{formatted}"
+
 def print_section(title: str):
     print(f"\n{'='*60}")
     print(f"  {title}")
@@ -31,8 +48,8 @@ def main():
 
     print(f"Records loaded : {summary['total_records']}")
     print(f"Date range     : {summary['date_range']}")
-    print(f"Total Sales    : ${summary['total_sales']:,}")
-    print(f"Total Profit   : ${summary['total_profit']:,}")
+    print(f"Total Sales    : {format_inr(summary['total_sales'])}")
+    print(f"Total Profit   : {format_inr(summary['total_profit'])}")
     print(f"Avg Margin     : {summary['avg_profit_margin']:.2%}")
     print(f"Products       : {', '.join(summary['products'])}")
     print(f"Regions        : {', '.join(summary['regions'])}")
@@ -46,8 +63,8 @@ def main():
 
     best = pa.best_performing_product()
     print(f"\nBest Product: {best['product']}")
-    print(f"Sales  : ${best['total_sales']:,}")
-    print(f"Profit : ${best['total_profit']:,}")
+    print(f"Sales  : {format_inr(best['total_sales'])}")
+    print(f"Profit : {format_inr(best['total_profit'])}")
     print(f"Units  : {best['total_units']:,}")
     print(f"Margin : {best['avg_profit_margin']:.2%}")
 
@@ -98,7 +115,7 @@ def main():
 
     top = predictions.iloc[0]
     print(f"\n Predicted top product: {top['product']} from {top['channel']} in {top['region']}")
-    print(f" Expected Sales: ${top['predicted_sales']:,.0f}")
+    print(f"Expected Sales: {format_inr(top['predicted_sales'])}")
 
     print("\n Generating Charts")
     plotter = Plotter()
@@ -112,9 +129,9 @@ def main():
     plotter.plot_predictions(predictions)
     plotter.plot_feature_importance(importance)
 
-    print(f"Best Product: {best['product']} (${best['total_sales']:,} sales)")
-    print(f"Best Region: {regional_summary.iloc[0]['region']} (${int(regional_summary.iloc[0]['total_sales']):,} sales)")
-    print(f"Best Channel: {channel_summary.iloc[0]['channel']} (${int(channel_summary.iloc[0]['total_sales']):,} sales)")
+    print(f"Best Product: {best['product']} ({format_inr(best['total_sales'])} sales)")
+    print(f"Best Region: {regional_summary.iloc[0]['region']} ({format_inr(regional_summary.iloc[0]['total_sales'])} sales)")
+    print(f"Best Channel: {channel_summary.iloc[0]['channel']} ({format_inr(channel_summary.iloc[0]['total_sales'])} sales)")
     print(f"Predicted #1 Product: {top['product']} | {top['region']} | {top['channel']}")
     print(f"Model R² Score: {metrics['R2']}")
     print(f"\n  Charts saved to reports folder")
